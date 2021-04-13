@@ -125,7 +125,6 @@ def rand_movie(postData):
             if not any(movie['movieID'] == movies_all[rnd]['movieID'] for movie in movies): # checks to make sure the movie ID isn't already in the list
                 movies.append(movies_all[rnd])
             num.append(rnd)
-            # print(num)
             # print(movies_all[rnd]['movieID'])
     context = {
         'movies': movies
