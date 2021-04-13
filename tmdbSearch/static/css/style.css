@@ -1,0 +1,51 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.wrapper {
+    margin: 10px auto;
+    width:  970px; 
+}
+
+.sBtn {
+    width: 100px;
+    text-decoration: none;
+    color: black;
+}
+
+.sBtn a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.box1 {
+    border: 1px solid black;
+    width: 100px;
+}
+
+.box2 {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 20px 20px;
+}
+
+.box3 {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 5px;
+    height: 120px;
+    overflow: scroll;
+}
+
+.errmsg {
+    font-size: 12px;
+    color: red;
+}
+
+.sm-text{
+    font-size: 8px;
+}
+/* label {
+    display: block;
+} */
