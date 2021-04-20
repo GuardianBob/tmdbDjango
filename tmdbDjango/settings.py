@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'loginApp',
     'tmdbSearch',    
     'django.contrib.admin',
     'django.contrib.auth',

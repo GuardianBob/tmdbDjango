@@ -43,28 +43,27 @@
         });
     </script> -->
 </head>
-<body>
-    <div class="row">
+<body style="background-color: #161B22">
+    <div class="row" style="background-color: #161B22">
         <div class="col-md-12 justify-content-between">
-            <nav class="navbar navbar-light bg-light ">  
-                <div class="col-md-3 navbar-brand">Welcome {{ user.first_name }}!</div>
-                <div class="col-md-3.5 align-content-end">                        
-                    <a class="nav-item btn btn-light" href="/main">Home</a>
-                    <a class="nav-item btn btn-light ml-3" href="/logout">Logout</a>
+            <nav class="navbar text-light ">  
+                <div class="col">Welcome!</div>
+                <div class="col text-right">                        
+                    <a class="nav-item btn btn-outline-dark text-light" href="/">Home</a>
                 </div>
             </nav>
         </div>        
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-8 mx-auto text-light">
                 <h3>Find Movies</h3>
                 <form action="search" method="post">
                     {% csrf_token %}
-                    <div class="form-group row">
+                    <div class="form-group row text-light">
                         <div class="col-sm-5">
                             <label for="startYear" class="">Start Year: </label>
-                            <select name="startYear" id="startYear" class="btn btn-outline-secondary dropdown-toggle form-control ">
+                            <select name="startYear" id="startYear" class="btn btn-outline-secondary dropdown-toggle form-control  text-light">
                                 {% for i in yearRange reversed%}
                                     {% if i == info.startYear|add:"0" %}
                                         <option value="{{ i }}" selected>{{ i }}</option>
@@ -76,7 +75,7 @@
                         </div>
                         <div class="col-sm-5">
                             <label for="endYear" class="">End Year: </label>
-                            <select name="endYear" id="endYear" class="btn btn-outline-secondary dropdown-toggle form-control ">
+                            <select name="endYear" id="endYear" class="btn btn-outline-secondary dropdown-toggle form-control  text-light">
                                 {% for i in yearRange reversed %}
                                     {% if i == info.endYear|add:"0" %}
                                         <option value="{{ i }}" selected>{{ i }}</option>
@@ -88,7 +87,7 @@
                         </div>
                         <div class="col-sm-5">
                             <label for="genres" class="">Genres: </label>                                              
-                            <select name="genres" id="genres" class="form-control" size="5" multiple >
+                            <select name="genres" id="genres" class="form-control text-light bg-dark" size="5" multiple >
                                 {% for genre in mGenres %}
                                     <option value="{{ genre }}">{{ genre }}</option>
                                 {% endfor %}
@@ -96,7 +95,7 @@
                         </div>
                         <div class="col-sm-5">
                             <label for="minRating" class="">Minimum Rating: </label>                        
-                            <select name="minRating" id="minRating" class="btn btn-outline-secondary dropdown-toggle form-control ">
+                            <select name="minRating" id="minRating" class="btn btn-outline-secondary dropdown-toggle form-control  text-light">
                                 {% for i in rateRange %}
                                     {% if i == info.minRating|add:"0" %}
                                         <option value="{{ i }}" selected>{{ i }}</option>
@@ -107,7 +106,7 @@
                             </select>
 
                             <label for="minVotes" class="">Minimum Votes: </label>                        
-                            <select name="minVotes" id="minVotes" class="btn btn-outline-secondary dropdown-toggle form-control">
+                            <select name="minVotes" id="minVotes" class="btn btn-outline-secondary dropdown-toggle form-control text-light">
                                 {% for i in voteRange %}
                                     {% if i == info.minVotes|add:"0" %}
                                         <option value="{{ i }}" selected>{{ i }}</option>
@@ -119,7 +118,7 @@
                         </div>
                         <div class="col-sm-5">
                             <label for="sortBy" class="">Sort By: </label>                        
-                            <select name="sortBy" id="sortBy" class="btn btn-outline-secondary dropdown-toggle form-control ">
+                            <select name="sortBy" id="sortBy" class="btn btn-outline-secondary dropdown-toggle form-control  text-light">
                                 {% for sort in sortBy %}  
                                     <option value="{{ sort }}">{{ sort }}</option>
                                 {% endfor %}
@@ -127,7 +126,7 @@
                         </div>
                         <div class="col-sm-5">
                             <label for="country" class="">Country of Origin: </label>
-                            <select name="country" id="country" class="btn btn-outline-secondary dropdown-toggle form-control ">
+                            <select name="country" id="country" class="btn btn-outline-secondary dropdown-toggle form-control  text-light">
                                 <option value="USA">USA</option>
                                 <option value="Japan">Japan</option>
                                 <option value="">All</option>
@@ -135,7 +134,7 @@
                         </div>
                         <div class="col-sm-5">
                             <label for="type" class="">Type: </label>
-                            <select name="type" id="type" class="btn btn-outline-secondary dropdown-toggle form-control ">
+                            <select name="type" id="type" class="btn btn-outline-secondary dropdown-toggle form-control  text-light">
                                 <option value="movie">Movie</option>
                                 <option value="tv">TV</option>
                             </select>

@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 import tmdbsimple as tmdb
 import random, datetime
-from loginApp.models import User
 import datetime
 # from .keywords import keywords as kWords
 
@@ -86,24 +85,33 @@ def get_movies(postData):
     
     # print(postData['keywords'], " : ", keyWds)
     i = 1
-    response = discover.movie(**kwargs) 
+    response = discover.movie(**kwargs)
     results = []
-    # print(len(discover.results))
+    oldDict = discover.results
+    # print(genres)
+    # print(oldDict)
+    # newDict = dict(filter(lambda itm: genres[1] in itm['genre_ids'], oldDict.items()))  
+    # filterd_movies = [d for d in oldDict if all(x in d['genre_ids'] for x in genres)]
+    # print("old dict: ", len(oldDict))
+    # print("new dict: ", len(filterd_movies))
     while len(discover.results) > 1:
+
         # print(len(discover.results))
         # print(i)
         kwargs['page'] = i
-        response = discover.movie(**kwargs)            
-        for res in discover.results:
-            if all(x in res['genre_ids'] for x in genres):  # Checks to make sure all genres searched for are included in movie's genres
+        response = discover.movie(**kwargs) 
+        oldDict = discover.results
+        filterd_movies = [d for d in oldDict if all(x in d['genre_ids'] for x in genres)]
+        for res in filterd_movies:            
+            # if all(x in res['genre_ids'] for x in genres):  # Checks to make sure all genres searched for are included in movie's genres
                 # print(res['genre_ids'])                
-                results.append({
-                    'title': res['title'],
-                    'date': res['release_date'][:4],
-                    'descr': res['overview'],
-                    'rating': res['vote_average'],
-                    'posterImg': posterURL + str(res['poster_path']),
-                    'movieID': res['id']
+            results.append({
+                'title': res['title'],
+                'date': res['release_date'][:4],
+                'descr': res['overview'],
+                'rating': res['vote_average'],
+                'posterImg': posterURL + str(res['poster_path']),
+                'movieID': res['id']
             })
         i += 1      
         res_list = [i for n, i in enumerate(results) if i not in results[n + 1:]]
@@ -114,11 +122,11 @@ def rand_movie(postData):
     movies_all = get_movies(postData)
     movies = []
     # print (len(movies_all))
-    if len(movies_all) <= 10:
+    if len(movies_all) <= 20:
         for movie in movies_all:
             movies.append(movie)
     else:
-        while len(movies) < 10:
+        while len(movies) < 20:
             # rnd = random.randint(0,len(movies_all) - 1)
             rnd = random.choice([i for i in range(0,(len(movies_all)-1)) if i not in num]) # generates a random number excluding ones already thrown            
             # if movies_all[rnd]['movieID'] not in movies:
@@ -132,7 +140,6 @@ def rand_movie(postData):
     return movies
 
 def index(request):
-    user = User.objects.get(id=request.session['user_id'])  
     date =  datetime.datetime.now()
     yrNow = date.year
     past = date - datetime.timedelta(days=(5*365.24))
@@ -141,7 +148,6 @@ def index(request):
     context = {
         'mGenres': mGenres,
         'sortBy': sortBy,
-        'user': user,
         'yearRange': range(1960, yrNow + 1),
         'rateRange': range(0,10),
         'voteRange': range(0,1000, 100),
@@ -156,7 +162,6 @@ def index(request):
 def search(request):
     if request.method != "POST":
         return redirect('/')
-    user = User.objects.get(id=request.session['user_id'])
     for key in request.POST:
         request.session['values'] = request.POST
     # print(request.session['values'])
@@ -166,7 +171,6 @@ def search(request):
         movies = get_movies(request.POST)
     context = {
         'movies': movies,
-        'user': user,
     }
     return render(request, 'results.html', context)
 

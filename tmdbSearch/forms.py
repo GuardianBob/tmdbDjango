@@ -1,5 +1,4 @@
 from .models import Movie
-from loginApp.models import User
 from django import forms
 import datetime
 
