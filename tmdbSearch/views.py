@@ -4,7 +4,7 @@ import random, datetime
 import datetime
 # from .keywords import keywords as kWords
 
-tmdb.API_KEY = '1185412e00a20896217f777462cbdaff'
+tmdb.API_KEY = settings.TMDB_API
 
 mGenres = {    
     'action':28,
