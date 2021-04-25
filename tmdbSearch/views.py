@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 import tmdbsimple as tmdb
 import random, datetime
 import datetime
+from django.conf import settings
 # from .keywords import keywords as kWords
 
 tmdb.API_KEY = settings.TMDB_API
